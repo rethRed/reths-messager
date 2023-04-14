@@ -1,2 +1,2 @@
-export * from "./event-miter-interface"
+export * from "./event-emitter-interface"
 export * from "./base-event"
