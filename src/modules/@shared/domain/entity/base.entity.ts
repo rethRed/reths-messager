@@ -1,12 +1,16 @@
 import Crypto from "crypto";
 
-export class BaseEntity {
+export abstract class BaseEntity<EntityProps> {
     private _id: string
     private _createdAt: Date
+    private _updatedAt?: Date;
+    protected props: EntityProps;
 
-    constructor(id?: string, createdAt?: Date) {
+    constructor(props: EntityProps, id?: string, createdAt?: Date, updatedAt?: Date) {
         this._id = id || Crypto.randomUUID()
+        this.props = props
         this._createdAt = createdAt || new Date()
+        this._updatedAt = updatedAt
     }
 
     get id(): string {
@@ -16,4 +20,11 @@ export class BaseEntity {
     get createdAt(): Date {
         return this._createdAt
     }
+
+    get updatedAt(): Date | undefined {
+        return this._updatedAt;
+    }
+
+    abstract toJSON(): Record<string, unknown> 
+
 }
