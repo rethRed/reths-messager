@@ -1,1 +1,1 @@
-export * from "./mockEventEmiter"
+export * from "./mock-event-emiter"
