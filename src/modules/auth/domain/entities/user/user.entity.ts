@@ -1,12 +1,19 @@
 import { BaseEntity } from "@/modules/@shared/domain";
 import { Either, left } from "@/modules/@shared/logic";
+import { UserValidatorFactory } from "./validators";
 
 export class UserEntity extends BaseEntity<UserEntity.Props> {
     private constructor(props: UserEntity.Props, id?: string) {
         super(props, id)
     }
 
-    static create(): UserEntity.Output{
+    static create(input: UserEntity.Input): UserEntity.Output{
+
+        const userValidator = UserValidatorFactory.create()
+        const validatedUser = userValidator.validate({
+            ...input
+        })
+        if(validatedUser.isLeft()) return left(validatedUser.value)
 
         return left([])
     }

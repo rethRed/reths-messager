@@ -3,7 +3,7 @@ import { UserEntity } from "../user.entity";
 import { YupUserValidator } from "./yup-user-validator.interface";
 
 export class UserValidatorFactory {
-    create(): DomainValidator<UserEntity.Props> {
+    static create(): DomainValidator<UserEntity.Props> {
         return new YupUserValidator()
     }
 }
