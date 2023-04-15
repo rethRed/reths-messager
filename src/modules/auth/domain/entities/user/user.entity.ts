@@ -1,5 +1,5 @@
 import { BaseEntity } from "@/modules/@shared/domain";
-import { Either, left } from "@/modules/@shared/logic";
+import { Either, left, right } from "@/modules/@shared/logic";
 import { UserValidatorFactory } from "./validators";
 
 export class UserEntity extends BaseEntity<UserEntity.Props> {
@@ -7,7 +7,7 @@ export class UserEntity extends BaseEntity<UserEntity.Props> {
         super(props, id)
     }
 
-    static create(input: UserEntity.Input): UserEntity.Output{
+    static create(input: UserEntity.Input, id?: string): UserEntity.Output{
 
         const userValidator = UserValidatorFactory.create()
         const validatedUser = userValidator.validate({
@@ -15,7 +15,11 @@ export class UserEntity extends BaseEntity<UserEntity.Props> {
         })
         if(validatedUser.isLeft()) return left(validatedUser.value)
 
-        return left([])
+        const userEntity = new UserEntity({
+            ...input
+        }, id)
+
+        return right(userEntity)
     }
 
 
