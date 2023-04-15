@@ -8,8 +8,6 @@ export class UserEntity extends BaseEntity<UserEntity.Props> {
 
     static create(): UserEntity.Output{
 
-
-
         return left([])
     }
 
@@ -17,12 +15,20 @@ export class UserEntity extends BaseEntity<UserEntity.Props> {
     toJSON(): UserEntity.UserEntityPropsJson {
         return {
             id: this.id,
-            username: this.username
+            username: this.username,
+            email: this.email,
+            password: this.password,
         }
     }
 
     get username(): string{
         return this.props.username
+    }
+    get email(): string{
+        return this.props.email
+    }
+    get password(): string{
+        return this.props.password
     }
 }
 
@@ -30,13 +36,16 @@ export namespace UserEntity {
     
     export type Input = {
         username: string
+        email: string
+        password: string
     }
     
     export type Props = {
         username: string
+        email: string
+        password: string
     }
 
     export type Output = Either<Error[], UserEntity>
-    export type UserEntityPropsJson = Input & { id: string }
-    
+    export type UserEntityPropsJson = Omit<Input, "password"> & { id: string, password: string }
 }
