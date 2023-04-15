@@ -3,14 +3,16 @@ import { UserEntity } from "./user.entity"
 
 type SutTypes = {
     sut: UserEntity
-    props: UserEntity.Props
+    props: UserEntity.Input
 }
 
 const makeSut = (): SutTypes => {
-    const props: UserEntity.Props = {
+    const props: UserEntity.Input = {
         username: "any_username",
         email: "any_mail@gmail.com",
-        password: "any_password",
+        password: {
+            value: "any_password"
+        },
     }
     const sut = UserEntity.create(props)
     if(sut.isLeft()) throw sut.value[0]
@@ -33,7 +35,7 @@ describe("test user", () => {
             id: "any_id",
             username: props.username,
             email: props.email,
-            password: props.password
+            password: sut.value.password
         })
     })
 
@@ -42,11 +44,11 @@ describe("test user", () => {
 
         const sut = UserEntity.create({
             ...props,
-            username: {} as string
+            username: ""
         }, "any_id")
 
         if(sut.isLeft()){
-            console.log(sut.value[0].name)
+            // console.log(sut.value)
         }
 
     })

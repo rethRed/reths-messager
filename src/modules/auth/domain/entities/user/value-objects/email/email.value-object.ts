@@ -10,7 +10,7 @@ export class EmailValueObject {
         return this.email;
     }
 
-    create(email: string): Either<Error[], EmailValueObject>{
+    static create(email: string): Either<Error[], EmailValueObject>{
 
         const emailValidator = EmailValidatorFactory.create()
         const emailValid = emailValidator.validate(email)
