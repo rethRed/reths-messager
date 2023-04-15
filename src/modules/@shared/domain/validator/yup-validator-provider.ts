@@ -3,7 +3,7 @@ import { Either, left, right } from '../../logic';
 import { YupErrorAdapter } from './yup-error-adapter';
 
 export abstract class YupValidatorProvider {
-    abstract schema: yup.ObjectSchema<any>
+    abstract schema: yup.Schema<any>
 
     validateSchema(props: any): Either<Error[], null>{
         try{

@@ -15,9 +15,11 @@ export class YupUserValidator extends YupValidatorProvider implements DomainVali
     });
 
     validate(props: UserEntity.Props): Either<Error[], null> {
-        
+        const errors: Error[] = []
+
         const schemaValid = this.validateSchema(props)
-        if(schemaValid.isLeft()) return left(schemaValid.value)
+        if(schemaValid.isLeft()) errors.push(...schemaValid.value)
+        if(errors.length > 0) return left(errors)
         return right(null)
     }
 }

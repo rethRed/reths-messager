@@ -57,5 +57,5 @@ export namespace UserEntity {
     }
 
     export type Output = Either<Error[], UserEntity>
-    export type UserEntityPropsJson = Omit<Input, "password"> & { id: string, password: string }
+    export type UserEntityPropsJson = Input & { id: string }
 }

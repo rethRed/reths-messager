@@ -1,2 +1,2 @@
-export * from "./yup-user-validator.interface"
+export * from "./yup-user-validator"
 export * from "./user-validator.factory"
