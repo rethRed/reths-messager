@@ -14,7 +14,6 @@ export class UserEntity extends BaseEntity<UserEntity.Props> {
             ...input
         })
         if(validatedUser.isLeft()) return left(validatedUser.value)
-
         const userEntity = new UserEntity({
             ...input
         }, id)

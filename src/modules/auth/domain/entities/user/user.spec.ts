@@ -36,4 +36,15 @@ describe("test user", () => {
             password: props.password
         })
     })
+
+    it("Should", () => {
+        const { props } = makeSut()
+
+        const sut = UserEntity.create({
+            ...props,
+            username: {} as string
+        }, "any_id")
+
+        
+    })
 })
