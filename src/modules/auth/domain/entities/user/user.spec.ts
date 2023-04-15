@@ -45,6 +45,9 @@ describe("test user", () => {
             username: {} as string
         }, "any_id")
 
-        
+        if(sut.isLeft()){
+            console.log(sut.value[0].name)
+        }
+
     })
 })

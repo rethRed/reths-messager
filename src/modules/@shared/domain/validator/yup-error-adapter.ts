@@ -8,11 +8,7 @@ export class YupErrorAdapter {
     static toDomainFormat(formatedError: string): Error  {
         const err = JSON.parse(formatedError)
         const error = new Error(err.message)
-        error.name = err
+        error.name = err.name
         return error
     }
-}
-
-export namespace YupErrorAdapter {
-    export type YupFormat = { name: string, message: string }
 }
